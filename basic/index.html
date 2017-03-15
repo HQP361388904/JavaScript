@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, Chrome=1">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>原生JavaScript常用交互方法大杂烩</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+</head>
+<body>
+    <input type="button" value="新窗口打开网站" onclick="openWindow()">
+    <script type="text/javascript" charset="utf-8">
+        function openWindow(){
+            var isNewBox, userUrl, userWin;
+            // 目标网址
+            var targetUrl = "https://github.com/";
+
+            // 确认
+            isNewBox = confirm("是否打开新窗口？");
+
+            if(isNewBox){
+                // 询问
+                userUrl = prompt("请输入链接地址", targetUrl);
+
+                if(userUrl != null){
+                    if(userUrl == targetUrl){
+                        // 打开窗口
+                        window.open(userUrl, "_blank", "width=800, height=400, top=300, left=300, menubar=yes, toolbar=yes, scrollbar=yes, status=no");
+                    }else{
+                        userWin = window.open(userUrl, "_blank", "width=800, height=400, top=300, left=300");
+
+                        setTimeout(function(){
+                            // 关闭窗口
+                            userWin.close();
+                            alert("您在新窗口打开了一个意料之外的网站！");
+                        }, 1000);
+                    }
+                }else{
+                    // 警告
+                    alert("Oh, My God! 您拒绝输入链接地址。那就手动点击访问吧~！");
+                    // 输出内容
+                    document.write("<a href='"+targetUrl+"' target='_blank'>目标地址</a>");
+                }
+            }else{
+                alert("Game Over! 您取消了新窗口的打开。");
+            }
+        }
+    </script>
+</body>
+</html>
